@@ -225,15 +225,15 @@ Main Supervisor Agent
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                                USER INTERFACE LAYER                              │
+│                                USER INTERFACE LAYER                             │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │  Streamlit App (Port 8501)          │  Direct Client Usage                      │
 │  ┌─────────────────────────────┐    │  ┌─────────────────────────────────────┐  │
 │  │ • Chat Interface            │    │  │ • AgentClient                       │  │
-│  │ • Agent Selection           │    │  │ • Sync/Async Methods               │  │
-│  │ • Model Selection           │    │  │ • Streaming Support                │  │
-│  │ • Feedback System           │    │  │ • History Management               │  │
-│  │ • Thread Management         │    │  │                                   │  │
+│  │ • Agent Selection           │    │  │ • Sync/Async Methods                │  │
+│  │ • Model Selection           │    │  │ • Streaming Support                 │  │
+│  │ • Feedback System           │    │  │ • History Management                │  │
+│  │ • Thread Management         │    │  │                                     │  │
 │  └─────────────────────────────┘    │  └─────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
@@ -241,15 +241,15 @@ Main Supervisor Agent
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              SERVICE LAYER (FastAPI)                            │
 ├─────────────────────────────────────────────────────────────────────────────────┤
-│  FastAPI Service (Port 8080)                                                   │
+│  FastAPI Service (Port 8080)                                                    │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
 │  │ Endpoints:                                                              │    │
-│  │ • /info - Service metadata                                             │    │
-│  │ • /{agent_id}/invoke - Non-streaming agent calls                       │    │
-│  │ • /{agent_id}/stream - Streaming agent calls                           │    │
-│  │ • /feedback - LangSmith feedback recording                             │    │
-│  │ • /history - Chat history retrieval                                    │    │
-│  │ • /health - Health check                                               │    │
+│  │ • /info - Service metadata                                              │    │
+│  │ • /{agent_id}/invoke - Non-streaming agent calls                        │    │
+│  │ • /{agent_id}/stream - Streaming agent calls                            │    │
+│  │ • /feedback - LangSmith feedback recording                              │    │
+│  │ • /history - Chat history retrieval                                     │    │
+│  │ • /health - Health check                                                │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
@@ -257,35 +257,35 @@ Main Supervisor Agent
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                                AGENT LAYER                                      │
 ├─────────────────────────────────────────────────────────────────────────────────┤
-│  Agent Registry & Execution                                                    │
+│  Agent Registry & Execution                                                     │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
 │  │ Available Agents:                                                       │    │
-│  │ • research-assistant (default) - Web search + calculator               │    │
-│  │ • rag-assistant - ChromaDB knowledge base                              │    │
-│  │ • chatbot - Simple conversational agent                                │    │
-│  │ • langgraph-supervisor-agent - Multi-agent coordination                │    │
-│  │ • interrupt-agent - Human-in-the-loop workflows                        │    │
-│  │ • github-mcp-agent - GitHub integration via MCP                        │    │
-│  │ • bg-task-agent - Background task processing                           │    │
-│  │ • knowledge-base-agent - Amazon Bedrock integration                    │    │
-│  │ • command-agent - Command execution                                    │    │
+│  │ • research-assistant (default) - Web search + calculator                │    │
+│  │ • rag-assistant - ChromaDB knowledge base                               │    │
+│  │ • chatbot - Simple conversational agent                                 │    │
+│  │ • langgraph-supervisor-agent - Multi-agent coordination                 │    │
+│  │ • interrupt-agent - Human-in-the-loop workflows                         │    │
+│  │ • github-mcp-agent - GitHub integration via MCP                         │    │
+│  │ • bg-task-agent - Background task processing                            │    │
+│  │ • knowledge-base-agent - Amazon Bedrock integration                     │    │
+│  │ • command-agent - Command execution                                     │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
                                         ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              LANGGRAPH EXECUTION                               │
+│                              LANGGRAPH EXECUTION                                │
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │  Agent Graph Processing                                                         │
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
-│  │ 1. Input Validation & Safety Check (LlamaGuard)                        │    │
-│  │ 2. Model Selection & Tool Binding                                      │    │
-│  │ 3. Graph Node Execution:                                               │    │
-│  │    • Model Node - LLM inference                                        │    │
-│  │    • Tool Node - Tool execution                                        │    │
-│  │    • Conditional Edges - Flow control                                  │    │
-│  │ 4. Streaming Response Generation                                       │    │
-│  │ 5. Memory Persistence                                                  │    │
+│  │ 1. Input Validation & Safety Check (LlamaGuard)                         │    │
+│  │ 2. Model Selection & Tool Binding                                       │    │
+│  │ 3. Graph Node Execution:                                                │    │
+│  │    • Model Node - LLM inference                                         │    │
+│  │    • Tool Node - Tool execution                                         │    │
+│  │    • Conditional Edges - Flow control                                   │    │
+│  │ 4. Streaming Response Generation                                        │    │
+│  │ 5. Memory Persistence                                                   │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────────┘
                                         │
@@ -312,14 +312,14 @@ Main Supervisor Agent
 ├─────────────────────────────────────────────────────────────────────────────────┤
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
 │  │ Database Layer (Configurable):                                          │    │
-│  │ • SQLite (default) - Local development                                 │    │
-│  │ • PostgreSQL - Production with connection pooling                      │    │
-│  │ • MongoDB - Document-based storage                                     │    │
+│  │ • SQLite (default) - Local development                                  │    │
+│  │ • PostgreSQL - Production with connection pooling                       │    │
+│  │ • MongoDB - Document-based storage                                      │    │
 │  │                                                                         │    │
 │  │ Memory Types:                                                           │    │
-│  │ • Checkpointer - Conversation state & thread memory                    │    │
-│  │ • Store - Long-term knowledge & cross-conversation data                │    │
-│  │ • Vector Store - RAG embeddings (ChromaDB)                             │    │
+│  │ • Checkpointer - Conversation state & thread memory                     │    │
+│  │ • Store - Long-term knowledge & cross-conversation data                 │    │
+│  │ • Vector Store - RAG embeddings (ChromaDB)                              │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
