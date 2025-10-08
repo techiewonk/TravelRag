@@ -11,6 +11,7 @@ from pydantic import ValidationError
 from client import AgentClient, AgentClientError
 from schema import ChatHistory, ChatMessage
 from schema.task_data import TaskData, TaskDataStatus
+from travel_widget import TravelWidget
 
 # A Streamlit app for interacting with the langgraph agent via a simple chat interface.
 # The app has three main functions which are all run async:
@@ -23,8 +24,8 @@ from schema.task_data import TaskData, TaskDataStatus
 # The app heavily uses AgentClient to interact with the agent's FastAPI endpoints.
 
 
-APP_TITLE = "Investment Advisory AI Platform"
-APP_ICON = "💼"
+APP_TITLE = "AI Travel Planning Platform"
+APP_ICON = "🌍"
 USER_ID_COOKIE = "user_id"
 
 
@@ -114,12 +115,17 @@ async def main() -> None:
         st.header(f"{APP_ICON} {APP_TITLE}")
 
         ""
-        "AI-powered investment advisory platform with multi-agent architecture for financial analysis and portfolio management"
+        "AI-powered travel planning platform with multi-agent architecture for comprehensive travel coordination and booking"
         ""
 
         if st.button(":material/chat: New Chat", use_container_width=True):
             st.session_state.messages = []
             st.session_state.thread_id = str(uuid.uuid4())
+            st.rerun()
+
+        # Add travel planning option
+        if st.button("🌍 Travel Planning", use_container_width=True):
+            st.session_state.show_travel_planning = True
             st.rerun()
 
         with st.popover(":material/settings: Settings", use_container_width=True):
@@ -144,7 +150,7 @@ async def main() -> None:
             )
             "[View full size on Github](https://github.com/techiewonk/TravelRag/blob/main/media/agent_architecture.png)"
             st.caption(
-                "Investment Advisory AI Platform with multi-agent architecture for financial analysis and portfolio management"
+                "AI Travel Planning Platform with multi-agent architecture for comprehensive travel coordination and booking"
             )
 
         if st.button(":material/schema: Architecture", use_container_width=True):
@@ -176,8 +182,24 @@ async def main() -> None:
 
         "[View the source code](https://github.com/techiewonk/TravelRag)"
         st.caption(
-            "Made with :material/favorite: by [Hemprasad](https://www.linkedin.com/in/hemprasad-badgujar/) - Investment Advisory AI Platform"
+            "Made with :material/favorite: by [Hemprasad](https://www.linkedin.com/in/hemprasad-badgujar/) - AI Travel Planning Platform"
         )
+
+    # Initialize travel planning state
+    if "show_travel_planning" not in st.session_state:
+        st.session_state.show_travel_planning = False
+
+    # Check if travel planning mode is active
+    if st.session_state.show_travel_planning:
+        # Show back to chat button
+        if st.button("← Back to Chat", type="secondary"):
+            st.session_state.show_travel_planning = False
+            st.rerun()
+        
+        # Show travel planning widget
+        travel_widget = TravelWidget()
+        travel_widget.run_travel_planning()
+        return
 
     # Draw existing messages
     messages: list[ChatMessage] = st.session_state.messages
@@ -186,15 +208,56 @@ async def main() -> None:
         match agent_client.agent:
             case "chatbot":
                 WELCOME = "Hello! I'm a simple chatbot. Ask me anything!"
-            case "interrupt-agent":
-                WELCOME = "Hello! I'm an interrupt agent. Tell me your birthday and I will predict your personality!"
-            case "research-assistant":
-                WELCOME = "Hello! I'm an AI-powered research assistant with web search and a calculator. Ask me anything!"
             case "rag-assistant":
                 WELCOME = """Hello! I'm an AI-powered Company Policy & HR assistant with access to AcmeTech's Employee Handbook.
                 I can help you find information about benefits, remote work, time-off policies, company values, and more. Ask me anything!"""
+            case "travel-planning-agent":
+                WELCOME = """🌍 Hello! I'm your AI Travel Planning Assistant! I can help you plan the perfect trip with:
+                • Destination research and recommendations
+                • Flight and hotel search via Amadeus API
+                • Travel package search and booking
+                • Itinerary planning and travel tips
+                • Airport and city code information
+                
+                Click the "🌍 Travel Planning" button in the sidebar for a guided experience, or ask me directly about any travel destination!"""
+            case "travel-booking-agent":
+                WELCOME = """📋 Hello! I'm your AI Travel Booking Assistant! I can help you with:
+                • Travel package booking and reservations
+                • Payment processing and confirmations
+                • Booking modifications and cancellations
+                • Travel documentation assistance
+                • Customer service and support
+                
+                I can process bookings for travel packages with detailed confirmations and reference numbers!"""
+            case "travel-destination-agent":
+                WELCOME = """🗺️ Hello! I'm your AI Travel Destination Assistant! I can help you with:
+                • Destination research and insights
+                • Travel recommendations based on preferences
+                • Cultural and historical information
+                • Best times to visit destinations
+                • Local attractions and activities
+                
+                Ask me about any destination and I'll provide detailed information!"""
+            case "travel-package-agent":
+                WELCOME = """📦 Hello! I'm your AI Travel Package Assistant! I can help you with:
+                • Travel package search and comparison
+                • Package recommendations
+                • Pricing and availability information
+                • Package customization options
+                • Booking assistance
+                
+                Tell me your travel preferences and I'll find the perfect package for you!"""
+            case "travel-supervisor-agent":
+                WELCOME = """🎯 Hello! I'm your AI Travel Supervisor! I coordinate all aspects of your travel planning:
+                • Orchestrates destination research
+                • Manages travel package selection
+                • Coordinates booking processes
+                • Ensures comprehensive travel planning
+                • Provides end-to-end travel coordination
+                
+                I'll help you plan your complete travel experience from start to finish!"""
             case _:
-                WELCOME = "Hello! I'm an AI agent. Ask me anything!"
+                WELCOME = "Hello! I'm an AI travel agent. Ask me anything about travel planning!"
 
         with st.chat_message("ai"):
             st.write(WELCOME)

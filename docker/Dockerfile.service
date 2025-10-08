@@ -17,4 +17,14 @@ COPY src/schema/ ./schema/
 COPY src/service/ ./service/
 COPY src/run_service.py .
 
-CMD ["python", "run_service.py"]
+# Copy scripts and data files
+COPY scripts/ ./scripts/
+COPY documents_rows.csv ./
+
+# Make startup script executable
+RUN chmod +x scripts/startup.sh
+
+# Create ChromaDB directory
+RUN mkdir -p /app/travel_chromadb
+
+CMD ["scripts/startup.sh", "python", "run_service.py"]

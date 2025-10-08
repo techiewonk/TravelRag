@@ -7,12 +7,10 @@ You can build a RAG assistant using a Chroma database.
 To create a Chroma database:
 
 1. Add the data you want to use to a folder, i.e. `./data`, Word and PDF files are currently supported.
-2. Open [`create_chroma_db.py` file](../scripts/create_chroma_db.py) and set the folder_path variable to the path to your data i.e. `./data`.
-3. You can change the database name, chunk size and overlap size.
-4. Assuming you have already followed the [Quickstart](#quickstart) and activated the virtual environment, to create the database run:
+2. Run the vector database creation script to set up your knowledge base:
 
 ```sh
-python scripts/create_chroma_db.py
+python scripts/create_chromadb_vector_db.py
 ```
 
 5. If successful, a Chroma db will be created in the repository root directory.

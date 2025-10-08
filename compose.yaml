@@ -34,6 +34,7 @@ services:
     # Volume mount of development-only credentials since compose watch doesn't sync ignored files and doesn't do initial sync when the service starts
     volumes:
       - ./privatecredentials:/privatecredentials
+      - travel_chromadb_data:/app/travel_chromadb
     develop:
       watch:
         - path: src/agents/
@@ -80,3 +81,4 @@ services:
 
 volumes:
   postgres_data:
+  travel_chromadb_data:

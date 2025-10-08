@@ -261,7 +261,7 @@ Main Supervisor Agent
 │  ┌─────────────────────────────────────────────────────────────────────────┐    │
 │  │ Available Agents:                                                       │    │
 │  │ • research-assistant (default) - Web search + calculator                │    │
-│  │ • rag-assistant - ChromaDB knowledge base                               │    │
+│  │ • rag-assistant - Knowledge base integration                             │    │
 │  │ • chatbot - Simple conversational agent                                 │    │
 │  │ • langgraph-supervisor-agent - Multi-agent coordination                 │    │
 │  │ • interrupt-agent - Human-in-the-loop workflows                         │    │
@@ -319,7 +319,7 @@ Main Supervisor Agent
 │  │ Memory Types:                                                           │    │
 │  │ • Checkpointer - Conversation state & thread memory                     │    │
 │  │ • Store - Long-term knowledge & cross-conversation data                 │    │
-│  │ • Vector Store - RAG embeddings (ChromaDB)                              │    │
+│  │ • Vector Store - RAG embeddings                                         │    │
 │  └─────────────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -370,7 +370,7 @@ Supervisor Agent → Sub-Agent Selection → Task Delegation → Result Aggregat
 #### **Agent Types**
 
 1. **Research Assistant** - Web search + calculator tools
-2. **RAG Assistant** - ChromaDB knowledge base integration
+2. **RAG Assistant** - Knowledge base integration
 3. **Supervisor Agent** - Multi-agent coordination
 4. **Interrupt Agent** - Human-in-the-loop workflows
 5. **GitHub MCP Agent** - Repository management
@@ -380,7 +380,7 @@ Supervisor Agent → Sub-Agent Selection → Task Delegation → Result Aggregat
 
 - **Checkpointer** - Conversation state persistence
 - **Store** - Long-term knowledge storage
-- **Vector Store** - RAG embeddings (ChromaDB)
+- **Vector Store** - RAG embeddings
 
 #### **Safety & Monitoring**
 
