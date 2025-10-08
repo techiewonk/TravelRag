@@ -1,3 +1,20 @@
+# Streamlit and sqlite
+.streamlit/secrets.toml
+checkpoints.db
+checkpoints.db-*
+
+# Langgraph
+.langgraph_api/
+
+# VSCode
+.vscode
+.DS_Store
+*.code-workspace
+
+# cursor
+.cursorindexingignore
+.specstory/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -94,12 +111,6 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
-
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
@@ -129,6 +140,7 @@ celerybeat.pid
 
 # Environments
 .env
+.python-version
 .venv
 env/
 venv/
@@ -165,17 +177,17 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+.idea/
 
-# Ruff stuff:
-.ruff_cache/
+# Data
+*.docx
+*.pdf
 
-# PyPI configuration file
-.pypirc
+# Chroma db
+*.db
+*.sqlite3
+*.bin
 
-# Cursor  
-#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to 
-#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
-#  refer to https://docs.cursor.com/context/ignore-files
-.cursorignore
-.cursorindexingignore
+# Private Credentials, ignore everything in the folder but the .gitkeep file
+privatecredentials/*
+!privatecredentials/.gitkeep
