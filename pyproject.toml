@@ -1,5 +1,5 @@
 [project]
-name = "investmentadvisory"
+name = "travelrag"
 version = "0.1.0"
 description = "AI-powered investment advisory service with intelligent agent architecture for financial analysis and portfolio management"
 readme = "README.md"
@@ -24,9 +24,11 @@ dependencies = [
     "jiter ~=0.8.2",
     "langchain-core ~=0.3.33",
     "langchain-community ~=0.3.16",
+    "amadeus ~=8.0.0",
     "langchain-anthropic ~= 0.3.0",
     "langchain-aws ~=0.2.14",
     "langchain-chroma ~=0.2.3",
+    "chromadb~=0.4.24",
     "langchain-google-genai ~=2.0.11",
     "langchain-google-vertexai>=2.0.7",
     "langchain-groq ~=0.2.1",
@@ -57,8 +59,7 @@ dependencies = [
     "uvicorn ~=0.32.1",
     "langchain-mcp-adapters>=0.1.10",
     # Production API integrations for market research
-    "yfinance ~=0.2.48",
-    "fredapi ~=0.5.2", 
+    "fredapi ~=0.5.2",
     "newsapi-python ~=0.2.7",
     "requests ~=2.32.3",
     "requests-cache ~=1.2.1",
